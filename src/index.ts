@@ -25,10 +25,10 @@ app.use(express.static('public'))
 app.use(morgan('combined'))
 route(app)
 
-app.get('/users', function (req, res) {
-  res.status(200)
-  res.json(USERS)
-})
+// app.get('/users', function (req, res) {
+//   res.status(200)
+//   res.json(USERS)
+// })
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`)
