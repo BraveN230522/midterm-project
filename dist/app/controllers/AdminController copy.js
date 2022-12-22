@@ -18,7 +18,6 @@ class AdminControllerClass {
         if (username === db_1.ADMIN_LOGIN.username && password === db_1.ADMIN_LOGIN.password) {
             res.status(200);
             db_1.ADMIN_INFO.token = 'Bearer ' + token;
-            db_1.tokenAdmin[0] = token;
             res.json(db_1.ADMIN_INFO);
         }
         else {
@@ -26,7 +25,11 @@ class AdminControllerClass {
         }
     }
     getUsers(req, res, next) {
-        res.json(db_1.USERS);
+        res.send('get users');
+        // if (username === ADMIN_LOGIN.username && password === ADMIN_LOGIN.password) {
+        // } else {
+        //   return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
+        // }
     }
 }
 exports.AdminController = new AdminControllerClass();

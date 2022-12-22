@@ -9,7 +9,7 @@ const AdminController_1 = require("../app/controllers/AdminController");
 const router = express_1.default.Router();
 exports.adminRouter = router;
 const express_validator_1 = require("express-validator");
-var { expressjwt } = require('express-jwt');
+const constants_1 = require("../constants");
 // const adminController = require('../app/controllers/AdminController')
-router.post('/login', (0, express_validator_1.body)('username').not().notEmpty().withMessage('Username is a require field'), (0, express_validator_1.body)('password').not().notEmpty().withMessage('Password is a require field'), AdminController_1.AdminController.login);
-router.get('/users', expressjwt({ secret: process.env.JWT_KEY || '1', algorithms: ['HS256'] }), AdminController_1.AdminController.getUsers);
+router.post(constants_1.noAuthAdminRoutes.login, (0, express_validator_1.body)('username').not().notEmpty().withMessage('Username is a require field'), (0, express_validator_1.body)('password').not().notEmpty().withMessage('Password is a require field'), AdminController_1.AdminController.login);
+router.get(constants_1.authAdminRoutes.users, AdminController_1.AdminController.getUsers);

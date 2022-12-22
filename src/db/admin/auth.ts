@@ -9,3 +9,5 @@ export const ADMIN_INFO: {
 } = {
   username: 'dung',
 }
+
+export const tokenAdmin: string[] = []

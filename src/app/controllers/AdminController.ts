@@ -1,6 +1,6 @@
 import { generateMissingFieldMsg } from './../../utilities/common'
 import { NextFunction, Request, RequestHandler, Response } from 'express'
-import { ADMIN_INFO, ADMIN_LOGIN } from '../../db'
+import { ADMIN_INFO, ADMIN_LOGIN, USERS, tokenAdmin } from '../../db'
 import { validationResult } from 'express-validator'
 import jwt from 'jsonwebtoken'
 
@@ -16,7 +16,8 @@ class AdminControllerClass {
 
     if (username === ADMIN_LOGIN.username && password === ADMIN_LOGIN.password) {
       res.status(200)
-      ADMIN_INFO.token = token
+      ADMIN_INFO.token = 'Bearer ' + token
+      tokenAdmin[0] = token
       res.json(ADMIN_INFO)
     } else {
       return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
@@ -24,11 +25,7 @@ class AdminControllerClass {
   }
 
   getUsers(req: Request, res: Response, next: NextFunction) {
-    res.send('get users')
-    // if (username === ADMIN_LOGIN.username && password === ADMIN_LOGIN.password) {
-    // } else {
-    //   return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
-    // }
+    res.json(USERS)
   }
 }
 
