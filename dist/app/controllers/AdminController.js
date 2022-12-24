@@ -16,9 +16,11 @@ class AdminControllerClass {
             return res.status(400).json({ errors: errors.array() });
         }
         if (username === db_1.ADMIN_LOGIN.username && password === db_1.ADMIN_LOGIN.password) {
+            //Update valid token to prevent login same account
+            db_1.tokenAdmin.splice(-1);
+            db_1.tokenAdmin.push(token);
             res.status(200);
             db_1.ADMIN_INFO.token = 'Bearer ' + token;
-            db_1.tokenAdmin[0] = token;
             res.json(db_1.ADMIN_INFO);
         }
         else {

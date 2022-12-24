@@ -5,9 +5,10 @@ export const ADMIN_LOGIN = {
 
 export const ADMIN_INFO: {
   username: string
-  token?: string
+  token: string
 } = {
   username: 'dung',
+  token: '',
 }
 
 export const tokenAdmin: string[] = []

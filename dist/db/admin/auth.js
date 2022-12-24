@@ -7,5 +7,6 @@ exports.ADMIN_LOGIN = {
 };
 exports.ADMIN_INFO = {
     username: 'dung',
+    token: '',
 };
 exports.tokenAdmin = [];

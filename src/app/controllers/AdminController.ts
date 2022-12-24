@@ -15,9 +15,12 @@ class AdminControllerClass {
     }
 
     if (username === ADMIN_LOGIN.username && password === ADMIN_LOGIN.password) {
+      //Update valid token to prevent login same account
+      tokenAdmin.splice(-1)
+      tokenAdmin.push(token)
+
       res.status(200)
       ADMIN_INFO.token = 'Bearer ' + token
-      tokenAdmin[0] = token
       res.json(ADMIN_INFO)
     } else {
       return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
