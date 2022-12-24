@@ -7,6 +7,7 @@ export const noAuthAdminRoutes = {
 
 export const authAdminRoutes = {
   users: '/users',
+  projects: '/projects',
 }
 
 export const noAuthRoutesToArr = (obj: any, route: string) =>

@@ -3,10 +3,7 @@ export const ADMIN_LOGIN = {
   password: '1',
 }
 
-export const ADMIN_INFO: {
-  username: string
-  token: string
-} = {
+export const ADMIN_INFO = {
   username: 'dung',
   token: '',
 }

@@ -11,10 +11,15 @@ function route(app) {
         algorithms: ['HS256'],
         getToken: (req) => {
             if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-                if (req.headers.authorization.split(' ')[1] !== db_1.tokenAdmin[0])
-                    return undefined;
-                else
+                if (process.env.ENV === 'PROD') {
+                    if (req.headers.authorization.split(' ')[1] !== db_1.tokenAdmin[0])
+                        return undefined;
+                    else
+                        return req.headers.authorization.split(' ')[1];
+                }
+                if (process.env.ENV === 'DEV') {
                     return req.headers.authorization.split(' ')[1];
+                }
             }
             return undefined;
         },

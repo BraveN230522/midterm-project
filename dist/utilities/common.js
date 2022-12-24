@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateMissingFieldMsg = void 0;
-const generateMissingFieldMsg = (obj) => {
-    const missingField = Object.entries(obj).find(([key, value]) => {
-        return !value;
-    });
-    return `${missingField === null || missingField === void 0 ? void 0 : missingField[0]} is a required field`;
+exports.dataMapping = exports.dataMappingSuccess = void 0;
+const dataMappingSuccess = (data) => {
+    return { data, message: 'Success' };
 };
-exports.generateMissingFieldMsg = generateMissingFieldMsg;
+exports.dataMappingSuccess = dataMappingSuccess;
+const dataMapping = (data) => {
+    return { data };
+};
+exports.dataMapping = dataMapping;

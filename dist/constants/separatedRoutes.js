@@ -8,6 +8,7 @@ exports.noAuthAdminRoutes = {
 };
 exports.authAdminRoutes = {
     users: '/users',
+    projects: '/projects',
 };
 const noAuthRoutesToArr = (obj, route) => Object.entries(obj).map(([_, value]) => {
     return route + value;

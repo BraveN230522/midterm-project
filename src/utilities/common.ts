@@ -1,6 +1,19 @@
-export const generateMissingFieldMsg = (obj: object) => {
-  const missingField = Object.entries(obj).find(([key, value]) => {
-    return !value
-  })
-  return `${missingField?.[0]} is a required field`
+export const dataMappingSuccess = (
+  data:
+    | {
+        [key: string]: any
+      }
+    | Array<any>
+) => {
+  return { data, message: 'Success' }
+}
+
+export const dataMapping = (
+  data:
+    | {
+        [key: string]: any
+      }
+    | Array<any>
+) => {
+  return { data }
 }
