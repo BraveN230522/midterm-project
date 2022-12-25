@@ -17,14 +17,14 @@ class UserControllerClass {
       res.json(dataMappingSuccess(usersMapping))
     } else {
       res.status(200)
-      res.json(dataMapping({ message: 'No users' }))
+      res.json(dataMapping({ message: 'No users found' }))
     }
   }
 
   getUserDetails(req: Request, res: Response, next: NextFunction) {
     const userInviteId = req.params.id
     const USERS = getUserDb()
-    const data = USERS.find((user) => user.inviteId === userInviteId)
+    const data = findObjectById({ arr: USERS, id: userInviteId })
 
     if (!_.isEmpty(data)) {
       res.status(200)
@@ -40,7 +40,15 @@ class UserControllerClass {
     const defaultProject = findObjectById({ arr: PROJECTS, id: req.body.defaultProject })
     const user = {
       inviteId: String(Date.now()),
-      projects: [defaultProject],
+      projects: [
+        {
+          id: defaultProject.id,
+          name: defaultProject.name,
+          slug: defaultProject.slug,
+          start_date: defaultProject.start_date,
+          end_date: defaultProject.end_date,
+        },
+      ],
     }
     USERS.push(user)
     res.status(200)

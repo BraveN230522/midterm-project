@@ -1,6 +1,6 @@
 import { getProjectDb } from './projects'
 import _ from 'lodash'
-import { IUser } from '../models'
+import { IUser } from './models'
 
 export const getUserDb = (): IUser[] => {
   return _.map(USERS, (user) => {

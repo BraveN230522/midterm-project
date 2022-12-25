@@ -1,4 +1,4 @@
-import { IAuth, IAuthInfo } from '../models/auth'
+import { IAuth, IAuthInfo } from './models/auth'
 
 export const ADMIN_LOGIN: IAuth = {
   username: 'dung',

@@ -19,7 +19,7 @@ class ProjectControllerClass {
       res.json(dataMappingSuccess(projectsMapping))
     } else {
       res.status(404)
-      res.json(dataMapping({ message: 'No projects' }))
+      res.json(dataMapping({ message: 'No projects found' }))
     }
   }
 

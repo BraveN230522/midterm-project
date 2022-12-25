@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 import { body } from 'express-validator'
 import { authAdminRoutes, noAuthAdminRoutes } from '../constants'
-import { UserController, AuthController, ProjectController } from '../app/controllers/admin'
+import { UserController, AuthController, ProjectController, TaskController } from '../app/controllers/admin'
 
 // const adminController = require('../app/controllers/AdminController')
 
@@ -22,6 +22,10 @@ router.post(authAdminRoutes.users, UserController.createUser)
 //PROJECTS
 router.get(authAdminRoutes.projects, ProjectController.getProjects)
 router.get(authAdminRoutes.projects + '/:id', ProjectController.getProjectDetails)
+
+//TASKS
+router.get(authAdminRoutes.tasks, TaskController.getTasks)
+router.get(authAdminRoutes.tasks + '/:id', TaskController.getTaskDetails)
 
 // router.patch('/:id/restore', adminController.restore)
 // router.get('/:slug', adminController.detail)

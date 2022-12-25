@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { IProject } from '../models'
+import { IProject } from './models'
 import { USERS } from './users'
 
 export const getProjectDb = (): IProject[] => {
