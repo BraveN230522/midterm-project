@@ -1,16 +1,28 @@
+import { findObjectById } from './../utilities/common'
 import express from 'express'
 const router = express.Router()
-import { body } from 'express-validator'
-import { authAdminRoutes, noAuthAdminRoutes } from '../constants'
-import { UserController, AuthController, ProjectController, TaskController } from '../app/controllers/admin'
+import { body, check } from 'express-validator'
+import { authAdminRoutes, noAuthAdminRoutes } from '../configs'
+import {
+  UserController,
+  AuthController,
+  ProjectController,
+  TaskController,
+  StatusController,
+  TypeController,
+  PriorityController,
+} from '../app/controllers/admin'
+import { STATUSES, TYPES } from '../db'
+import _ from 'lodash'
 
 // const adminController = require('../app/controllers/AdminController')
 
 //AUTH
 router.post(
   noAuthAdminRoutes.login,
-  body('username').not().notEmpty().withMessage('Username is a require field'),
-  body('password').not().notEmpty().withMessage('Password is a require field'),
+  check('username', 'Username is a require field').notEmpty(),
+  check('password', 'Password is a require field').notEmpty(),
+  check('password', 'Password must be at least 3 characters').isLength({ min: 3 }),
   AuthController.login
 )
 
@@ -26,14 +38,69 @@ router.get(authAdminRoutes.projects + '/:id', ProjectController.getProjectDetail
 //TASKS
 router.get(authAdminRoutes.tasks, TaskController.getTasks)
 router.get(authAdminRoutes.tasks + '/:id', TaskController.getTaskDetails)
+router.post(authAdminRoutes.tasks, TaskController.createTask)
 
-// router.patch('/:id/restore', adminController.restore)
-// router.get('/:slug', adminController.detail)
-// router.get('/deleted/:slug', adminController.detailDeleted)
-// router.get('/:id/edit', adminController.edit)
-// router.post('/store', adminController.store)
-// router.put('/:id', adminController.update)
-// router.delete('/:id', adminController.delete)
-// router.delete('/:id/force', adminController.forceDelete)
+//STATUSES
+router.get(authAdminRoutes.statuses, StatusController.getStatuses)
+router.get(authAdminRoutes.statuses + '/:id', StatusController.getStatusDetails)
+router.post(
+  authAdminRoutes.statuses,
+  check('name').custom((value: string, { req }) => {
+    const isExisted = _.findIndex(STATUSES, (status) => status.name === value) !== -1
+    if (isExisted) throw new Error('This name has been used')
+
+    return true
+  }),
+  check('order').custom((value: number, { req }) => {
+    const isExisted = _.findIndex(STATUSES, (status) => status.order === Number(value)) !== -1
+    if (isExisted) throw new Error('This order has been used')
+
+    return true
+  }),
+  check('order', 'order value must be integer and between 0 to 10').isInt({ min: 0, max: 10 }),
+  StatusController.createStatus
+)
+
+//TYPES
+router.get(authAdminRoutes.types, TypeController.getTypes)
+router.get(authAdminRoutes.types + '/:id', TypeController.getTypeDetails)
+router.post(
+  authAdminRoutes.types,
+  check('name').custom((value: string, { req }) => {
+    const isExisted = _.findIndex(TYPES, (status) => status.name === value) !== -1
+    if (isExisted) throw new Error('This name has been used')
+
+    return true
+  }),
+  check('order').custom((value: number, { req }) => {
+    const isExisted = _.findIndex(TYPES, (status) => status.order === Number(value)) !== -1
+    if (isExisted) throw new Error('This order has been used')
+
+    return true
+  }),
+  check('order', 'order value must be integer and between 0 to 10').isInt({ min: 0, max: 10 }),
+  TypeController.createType
+)
+
+//PRIORITIES
+router.get(authAdminRoutes.priorities, PriorityController.getPriorities)
+router.get(authAdminRoutes.priorities + '/:id', PriorityController.getPriorityDetails)
+router.post(
+  authAdminRoutes.priorities,
+  check('name').custom((value: string, { req }) => {
+    const isExisted = _.findIndex(STATUSES, (status) => status.name === value) !== -1
+    if (isExisted) throw new Error('This name has been used')
+
+    return true
+  }),
+  check('order').custom((value: number, { req }) => {
+    const isExisted = _.findIndex(STATUSES, (status) => status.order === Number(value)) !== -1
+    if (isExisted) throw new Error('This order has been used')
+
+    return true
+  }),
+  check('order', 'order value must be integer and between 0 to 10').isInt({ min: 0, max: 10 }),
+  PriorityController.createPriority
+)
 
 export { router as adminRouter }

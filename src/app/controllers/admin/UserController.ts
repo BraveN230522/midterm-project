@@ -25,6 +25,7 @@ class UserControllerClass {
     const userInviteId = req.params.id
     const USERS = getUserDb()
     const data = findObjectById({ arr: USERS, id: userInviteId })
+    console.log({ USERS })
 
     if (!_.isEmpty(data)) {
       res.status(200)

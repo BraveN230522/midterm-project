@@ -2,7 +2,7 @@ import { IAuth, IAuthInfo } from './models/auth'
 
 export const ADMIN_LOGIN: IAuth = {
   username: 'dung',
-  password: '1',
+  password: '123',
 }
 
 export const ADMIN_INFO: IAuthInfo = {

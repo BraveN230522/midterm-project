@@ -1,3 +1,6 @@
 export * from './user'
 export * from './projects'
 export * from './tasks'
+export * from './status'
+export * from './type'
+export * from './priority'

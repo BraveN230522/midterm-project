@@ -1,12 +1,20 @@
 import _ from 'lodash'
 import { IProject } from './models'
 import { USERS } from './users'
+import { TASKS } from './tasks'
 
 export const getProjectDb = (): IProject[] => {
   return _.map(PROJECTS, (project) => {
     const members = _.filter(USERS, (user) => {
       const thisProjectInUser = _.find(user.projects, (_project) => _project.id === project.id)
       return thisProjectInUser !== undefined
+    })
+
+    const tasks = _.filter(TASKS, (task) => {
+      return task.project === project.id
+    })
+    const mappingTask = _.map(tasks, (task) => {
+      return _.pick(task, ['id', 'name'])
     })
 
     const mappingMembers = _.map(members, (member) => {
@@ -24,7 +32,7 @@ export const getProjectDb = (): IProject[] => {
       start_date: project.start_date,
       end_date: project.end_date,
       members: mappingMembers,
-      tasks: [],
+      tasks: mappingTask,
     }
   })
 }

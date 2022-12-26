@@ -1,3 +1,4 @@
+import { IProject } from './projects'
 import { IUser } from './user'
 
 export interface ITask {
@@ -7,5 +8,7 @@ export interface ITask {
   priority: string
   type: string
   assignee: string
-  projectId: string
+  project: string
+  startDate: string
+  endDate: string
 }

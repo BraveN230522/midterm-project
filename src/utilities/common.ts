@@ -21,5 +21,10 @@ export const dataMapping = (
 }
 
 export const findObjectById = ({ arr, id }: { arr: Array<any>; id: String }) => {
-  return _.find(arr, (item) => item.id === id)
+  return _.find(arr, (item) => (item.id || item.inviteId) === id)
 }
+
+export const noAuthRoutesToArr = (obj: any, route: string) =>
+  Object.entries(obj).map(([_, value]) => {
+    return route + value
+  })

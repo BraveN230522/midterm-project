@@ -1,9 +1,10 @@
 import { Jwt } from 'jsonwebtoken'
 import { Express, Request, Response, NextFunction } from 'express'
 import { adminRouter } from './admin'
-import { adminRoute, noAuthAdminRoutes, noAuthRoutesToArr } from '../constants'
+import { adminRoute, noAuthAdminRoutes } from '../configs'
 import { expressjwt } from 'express-jwt'
 import { tokenAdmin } from '../db'
+import { noAuthRoutesToArr } from '../utilities'
 
 export function route(app: Express) {
   app.use(

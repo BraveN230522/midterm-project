@@ -35,16 +35,6 @@ class ProjectControllerClass {
       res.json(dataMapping({ message: 'Project is not found' }))
     }
   }
-
-  // createUser(req: Request, res: Response, next: NextFunction) {
-  //   const isValidInviteId = USERS.some((user) => user.inviteId !== req.body.inviteId)
-  //   if (isValidInviteId) {
-  //     res.status(200)
-  //   } else {
-  //     res.status(422)
-  //     res.json(dataMapping({ message: `InviteId ${req.body.inviteId} has been used` }))
-  //   }
-  // }
 }
 
 export const ProjectController = new ProjectControllerClass()
