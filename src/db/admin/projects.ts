@@ -18,19 +18,14 @@ export const getProjectDb = (): IProject[] => {
     })
 
     const mappingMembers = _.map(members, (member) => {
-      return {
-        inviteId: member.inviteId,
-        name: member.name,
-        email: member.email,
-        dob: member.dob,
-      }
+      return _.pick(member, ['inviteId', 'name', 'email', 'dob'])
     })
     return {
       id: project.id,
       name: project.name,
       slug: project.slug,
-      start_date: project.start_date,
-      end_date: project.end_date,
+      startDate: project.startDate,
+      endDate: project.endDate,
       members: mappingMembers,
       tasks: mappingTask,
     }
@@ -42,8 +37,8 @@ export const PROJECTS: IProject[] = [
     id: '1',
     name: 'Krunk',
     slug: 'krunk',
-    start_date: '10/10/2022',
-    end_date: '10/10/2023',
+    startDate: '10/10/2022',
+    endDate: '10/10/2023',
     members: [],
     tasks: [],
   },

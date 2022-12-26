@@ -46,8 +46,8 @@ class UserControllerClass {
           id: defaultProject.id,
           name: defaultProject.name,
           slug: defaultProject.slug,
-          start_date: defaultProject.start_date,
-          end_date: defaultProject.end_date,
+          startDate: defaultProject.startDate,
+          endDate: defaultProject.endDate,
         },
       ],
     }

@@ -17,7 +17,7 @@ import _ from 'lodash'
 
 // const adminController = require('../app/controllers/AdminController')
 
-//AUTH
+//* AUTH
 router.post(
   noAuthAdminRoutes.login,
   check('username', 'Username is a require field').notEmpty(),
@@ -26,21 +26,28 @@ router.post(
   AuthController.login
 )
 
-//USERS
+//* USERS
 router.get(authAdminRoutes.users, UserController.getUsers)
 router.get(authAdminRoutes.users + '/:id', UserController.getUserDetails)
 router.post(authAdminRoutes.users, UserController.createUser)
 
-//PROJECTS
+//* PROJECTS
 router.get(authAdminRoutes.projects, ProjectController.getProjects)
 router.get(authAdminRoutes.projects + '/:id', ProjectController.getProjectDetails)
+router.post(authAdminRoutes.projects, ProjectController.createProject)
+router.patch(
+  authAdminRoutes.projects + '/member' + '/:id',
+  check('memberIds', 'MemberIds is a require field').notEmpty(),
+  ProjectController.addMember
+)
+router.patch(authAdminRoutes.projects + '/:id', ProjectController.updateProject)
 
-//TASKS
+//* TASKS
 router.get(authAdminRoutes.tasks, TaskController.getTasks)
 router.get(authAdminRoutes.tasks + '/:id', TaskController.getTaskDetails)
 router.post(authAdminRoutes.tasks, TaskController.createTask)
 
-//STATUSES
+//* STATUSES
 router.get(authAdminRoutes.statuses, StatusController.getStatuses)
 router.get(authAdminRoutes.statuses + '/:id', StatusController.getStatusDetails)
 router.post(
@@ -61,7 +68,7 @@ router.post(
   StatusController.createStatus
 )
 
-//TYPES
+//* TYPES
 router.get(authAdminRoutes.types, TypeController.getTypes)
 router.get(authAdminRoutes.types + '/:id', TypeController.getTypeDetails)
 router.post(
@@ -82,7 +89,7 @@ router.post(
   TypeController.createType
 )
 
-//PRIORITIES
+//* PRIORITIES
 router.get(authAdminRoutes.priorities, PriorityController.getPriorities)
 router.get(authAdminRoutes.priorities + '/:id', PriorityController.getPriorityDetails)
 router.post(

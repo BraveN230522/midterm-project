@@ -5,9 +5,10 @@ export const dataMappingSuccess = (
     | {
         [key: string]: any
       }
-    | Array<any>
+    | Array<any>,
+  msg?: string
 ) => {
-  return { data, message: 'Success' }
+  return { data, message: msg || 'Success' }
 }
 
 export const dataMapping = (
@@ -28,3 +29,12 @@ export const noAuthRoutesToArr = (obj: any, route: string) =>
   Object.entries(obj).map(([_, value]) => {
     return route + value
   })
+
+export const isJsonString = (str: string) => {
+  try {
+    JSON.parse(str)
+  } catch (e) {
+    return false
+  }
+  return true
+}
