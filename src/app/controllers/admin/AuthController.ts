@@ -5,13 +5,14 @@ import { ADMIN_INFO, ADMIN_LOGIN, tokenAdmin } from '../../../db'
 
 class AuthControllerClass {
   login(req: Request, res: Response, next: NextFunction) {
-    const { username, password } = req.body
-    const token = jwt.sign({ username }, process.env.JWT_KEY || '1')
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array()[0] })
     }
+
+    const { username, password } = req.body
+    const token = jwt.sign({ username }, process.env.JWT_KEY || '1')
 
     if (username === ADMIN_LOGIN.username && password === ADMIN_LOGIN.password) {
       //Update valid token to prevent users login same account

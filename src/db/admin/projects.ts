@@ -42,4 +42,13 @@ export const PROJECTS: IProject[] = [
     members: [],
     tasks: [],
   },
+  {
+    id: '2',
+    name: 'Spectos',
+    slug: 'spectos',
+    startDate: '10/10/2022',
+    endDate: '10/10/2023',
+    members: [],
+    tasks: [],
+  },
 ]

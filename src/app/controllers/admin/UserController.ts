@@ -25,7 +25,6 @@ class UserControllerClass {
     const userInviteId = req.params.id
     const USERS = getUserDb()
     const data = findObjectById({ arr: USERS, id: userInviteId })
-    console.log({ USERS })
 
     if (!_.isEmpty(data)) {
       res.status(200)
@@ -40,7 +39,7 @@ class UserControllerClass {
     const PROJECTS = getProjectDb()
     const defaultProject = findObjectById({ arr: PROJECTS, id: req.body.defaultProject })
     const user = {
-      inviteId: String(Date.now()),
+      inviteId: String(USERS.length + 1),
       projects: [
         {
           id: defaultProject.id,

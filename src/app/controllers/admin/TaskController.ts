@@ -12,7 +12,7 @@ class TaskControllerClass {
       })
       res.json(dataMappingSuccess(mappingTasks))
     } else {
-      res.status(200)
+      res.status(404)
       res.json(dataMapping({ message: 'No tasks found' }))
     }
   }
@@ -82,11 +82,9 @@ class TaskControllerClass {
     }
 
     if (!_.isEmpty(taskResponse)) {
-      res.status(200)
-      res.json(dataMappingSuccess(taskResponse))
+      res.status(200).json(dataMappingSuccess(taskResponse))
     } else {
-      res.status(404)
-      res.json(dataMapping({ message: 'Task is not found' }))
+      res.status(404).json(dataMapping({ message: 'Task is not found' }))
     }
   }
 }
